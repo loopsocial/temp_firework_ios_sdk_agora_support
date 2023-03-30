@@ -5,17 +5,18 @@ import PackageDescription
 
 let package = Package(
     name: "FireworkVideoAgoraSupport",
-    platforms: [.iOS(.v12)],
+    platforms: [
+        .iOS(.v12)
+    ],
     products: [
         .library(
             name: "FireworkVideoAgoraSupport",
-            targets: ["FireworkVideoAgoraSupport"]
-        )
+            targets: ["FireworkVideoAgoraSupport", "FireworkVideoAgoraSupportDependencies"])
     ],
     dependencies: [
         .package(
             url: "https://github.com/AgoraIO/AgoraRtcEngine_iOS.git",
-            .upToNextMajor(from: "4.0.1")
+            .upToNextMajor(from: "4.1.1")
         ),
         .package(
             url: "https://github.com/apple/swift-protobuf.git",
@@ -25,16 +26,15 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "FireworkVideoAgoraSupport",
-            url: "https://github.com/loopsocial/firework_ios_sdk_agora_support/releases/download/v0.1.0/FireworkVideoAgoraSupport-v0.1.0.xcframework.zip",
-            checksum: "ac156e23338d0977f61b9071e441cb9588267ee6d17caecb01a28b22d0753ff6"
-        ),
-        .target(
-            name: "MyTarget",
-            dependencies: [
-                "FireworkVideoAgoraSupport",
-                .product(name: "AgoraRtcEngine_iOS", package: "AgoraRtcEngine_iOS"),
-                .product(name: "SwiftProtobuf", package: "swift-protobuf")
-            ]
+            url: "https://github.com/loopsocial/temp_firework_ios_sdk_agora_support/releases/download/v0.1.0/FireworkVideoAgoraSupport-0.1.0.xcframework.zip",
+            checksum: "8c398cb236abc2d8f2c355692f0a57e26898fb6336ab9f43508b116652da75d4"
         )
+        ,
+        .target(
+            name: "FireworkVideoAgoraSupportDependencies",
+            dependencies: [
+                .product(name: "RtcBasic", package: "AgoraRtcEngine_iOS"),
+                .product(name: "SwiftProtobuf", package: "swift-protobuf")
+            ])
     ]
 )
